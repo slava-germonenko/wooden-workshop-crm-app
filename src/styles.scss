@@ -1,0 +1,6 @@
+@use 'themes' as theme;
+@use '@nebular/theme/styles/globals' as nb;
+
+@include theme.nb-install() {
+  @include nb.nb-theme-global();
+};
