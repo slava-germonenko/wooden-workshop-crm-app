@@ -1,7 +1,7 @@
 {
   "/api": {
     "target": {
-      "host": "crm.testing.germonenko.by",
+      "host": "crm.germonenko.by",
       "protocol": "http:",
       "port": 80
     },
