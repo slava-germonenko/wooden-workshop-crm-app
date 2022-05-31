@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { distinctUntilChanged, map } from 'rxjs';
 
@@ -8,7 +8,6 @@ import { CurrentUserService, NavigationService } from '@common/services';
   selector: 'ww-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   public readonly currentUser$ = this.currentUserService.currentUser$;

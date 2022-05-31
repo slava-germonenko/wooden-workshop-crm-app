@@ -5,6 +5,17 @@
   @include nb.nb-theme-global();
 };
 
+.place-center {
+  display: grid;
+  place-items: center center;
+}
+
+.place-center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .full-width {
   width: 100%;
 }

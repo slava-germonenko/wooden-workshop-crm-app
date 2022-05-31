@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
+import { ACCESS_TOKEN_COOKIE_NAME } from '@common/constants';
+import { getDeviceName } from '@common/helper-functions';
 import { AccessToken, AuthResult } from '@common/models/auth';
 
 import { ApiUrlsService } from './api-urls.service';
@@ -17,7 +19,7 @@ export class AuthorizationService {
 
   public login(username: string, password: string): Observable<AuthResult> {
     const url = this.apiUrlsService.getLoginEndpointUrl();
-    return this.httpClient.post<AuthResult>(url, { username, password })
+    return this.httpClient.post<AuthResult>(url, { username, password, deviceName: getDeviceName() })
       .pipe(
         tap(({ accessToken }) => this.setAccessTokenCookie(accessToken)),
       );
@@ -37,6 +39,6 @@ export class AuthorizationService {
   }
 
   private setAccessTokenCookie(accessToken: AccessToken): void {
-    this.cookieService.set('ww-access-token', accessToken.token, accessToken.expireDate);
+    this.cookieService.set(ACCESS_TOKEN_COOKIE_NAME, accessToken.token);
   }
 }

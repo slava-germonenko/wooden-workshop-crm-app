@@ -15,7 +15,13 @@ import {
 import { CookieService } from 'ngx-cookie-service';
 
 import { FullNameModule } from '@framework/full-name';
-import { AuthorizationService, CurrentUserService, UsersService } from '@common/services';
+import { InterceptorsProvider, WithAccessTokenInterceptor } from '@common/interceptors';
+import {
+  AuthorizationService,
+  CurrentUserService,
+  NavigationService,
+  UsersService,
+} from '@common/services';
 
 import { appInitializerFactory } from './app-initializer';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,11 +50,12 @@ import { AppComponent } from './app.component';
     NbUserModule,
   ],
   providers: [
+    InterceptorsProvider.provide(WithAccessTokenInterceptor),
     CookieService,
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
-      deps: [AuthorizationService, CurrentUserService, UsersService],
+      deps: [AuthorizationService, CurrentUserService, NavigationService, UsersService],
       multi: true,
     },
   ],

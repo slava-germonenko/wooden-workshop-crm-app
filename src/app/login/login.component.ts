@@ -23,18 +23,9 @@ export class LoginComponent {
     return this.loginFormGroup.get('password')?.value as string;
   }
 
-  public set password(password: string) {
-    this.loginFormGroup.get('password')?.setValue(password);
-  }
-
   public constructor(private readonly loginService: LoginService) { }
 
   public login(): void {
-    this.loginService.login(this.username, this.password)
-      .subscribe({
-        error: () => {
-          this.password = '';
-        },
-      });
+    this.loginService.login(this.username, this.password).subscribe();
   }
 }

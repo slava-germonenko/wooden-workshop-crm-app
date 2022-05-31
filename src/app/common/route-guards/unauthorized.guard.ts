@@ -1,5 +1,5 @@
 import { CanActivate, CanActivateChild } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { CurrentUserService } from '@common/services';
 import { Injectable } from '@angular/core';
@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 export class UnauthorizedGuard implements CanActivate, CanActivateChild {
   private readonly unauthorized$ = this.currentUserService.authorized$.pipe(
     map((authorized) => !authorized),
-    tap(console.log),
   );
 
   public constructor(private readonly currentUserService: CurrentUserService) { }
