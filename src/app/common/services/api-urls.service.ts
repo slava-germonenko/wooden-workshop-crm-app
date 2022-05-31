@@ -10,6 +10,10 @@ export class ApiUrlsService {
 
   public constructor(private readonly environmentService: EnvironmentService) { }
 
+  public getBaseUsersEndpointUrl(): string {
+    return `${this.apiUrl}/api/users`;
+  }
+
   public getLoginEndpointUrl(): string {
     return `${this.apiUrl}/api/auth`;
   }

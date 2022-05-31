@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UnauthorizedGuard } from '@common/route-guards';
+import { PROFILE_SIDEBAR_ITEMS } from '@common/constants';
+import { SidebarItemsResolver } from '@common/resolvers';
+import { AuthorizedGuard, UnauthorizedGuard } from '@common/route-guards';
 
 const routes: Routes = [
   {
@@ -12,6 +14,15 @@ const routes: Routes = [
   {
     path: 'logout',
     loadChildren: () => import('@app/logout/logout.module').then((m) => m.LogoutModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('@app/profile/profile.module').then((m) => m.ProfileModule),
+    canActivate: [AuthorizedGuard],
+    resolve: [SidebarItemsResolver],
+    data: {
+      sidebar: PROFILE_SIDEBAR_ITEMS,
+    },
   },
 ];
 

@@ -31,6 +31,10 @@ export class CurrentUserService {
     pluck('currentUser'),
   );
 
+  public get currentUserSnapshot(): User | null {
+    return this.store.value.currentUser;
+  }
+
   public constructor(
     private readonly authService: AuthorizationService,
     private readonly toastr: NbToastrService,

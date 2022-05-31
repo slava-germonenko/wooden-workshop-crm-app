@@ -3,6 +3,7 @@ import { select } from '@ngneat/elf';
 import { pluck } from 'rxjs';
 
 import { navigationStore } from '@common/stores';
+import { NbMenuItem } from '@nebular/theme';
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
@@ -26,5 +27,9 @@ export class NavigationService {
 
   public setShowNavigation(visible: boolean): void {
     this.store.update((state) => ({ ...state, showSidebar: visible, showToolbar: visible }));
+  }
+
+  public setSidebarItems(sidebarItems: NbMenuItem[]): void {
+    this.store.update((state) => ({ ...state, sidebarItems}));
   }
 }

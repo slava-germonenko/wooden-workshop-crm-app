@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import {
   Observable,
@@ -24,6 +25,7 @@ export class LoginService {
     private readonly authService: AuthorizationService,
     private readonly currentUserService: CurrentUserService,
     private readonly navigationService: NavigationService,
+    private readonly router: Router,
     private readonly toastr: NbToastrService,
     private readonly usersService: UsersService,
   ) { }
@@ -42,6 +44,7 @@ export class LoginService {
           next: (user) => {
             this.currentUserService.startUserSession(user);
             this.navigationService.setShowNavigation(true);
+            this.router.navigate(['profile']);
           },
         }),
         map(VOID_FUNC),

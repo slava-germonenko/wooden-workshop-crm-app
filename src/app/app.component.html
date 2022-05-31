@@ -9,7 +9,9 @@
     </nb-user>
   </nb-layout-header>
 
-  <nb-sidebar *ngIf="showSidebar$ | async"></nb-sidebar>
+  <nb-sidebar *ngIf="showSidebar$ | async">
+    <nb-menu #menu [items]="sidebarItems" tag="sidebar"></nb-menu>
+  </nb-sidebar>
 
   <nb-layout-column>
     <router-outlet></router-outlet>

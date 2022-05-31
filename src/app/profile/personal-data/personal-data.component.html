@@ -1,0 +1,12 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="primary">
+  <nb-card-header>Персональные данные</nb-card-header>
+  <nb-card-body>
+    <ww-form
+      [fields]="personalDataFormFields"
+      [value]="personalData"
+      submitText="Сохранить"
+      (wwSubmit)="updateProfile($event)"
+    >
+    </ww-form>
+  </nb-card-body>
+</nb-card>

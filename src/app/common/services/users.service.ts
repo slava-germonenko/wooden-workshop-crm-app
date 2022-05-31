@@ -17,4 +17,9 @@ export class UsersService {
     const url = this.apiUrlsService.getUserDetailsEndpointUrl(id);
     return this.httpClient.get<User>(url);
   }
+
+  public updateUser(user: User): Observable<User> {
+    const url = this.apiUrlsService.getBaseUsersEndpointUrl();
+    return this.httpClient.patch<User>(url, user);
+  }
 }
