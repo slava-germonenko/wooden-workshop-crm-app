@@ -53,7 +53,7 @@ export class CurrentUserService {
     this.setUserDetails(user);
   }
 
-  public setUserDetails(currentUser: User): void {
+  public setUserDetails(currentUser: User | null): void {
     this.store.update((state) => ({ ...state, currentUser }));
   }
 }

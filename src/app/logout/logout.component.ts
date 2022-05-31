@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 
-import { AuthorizationService, NavigationService } from '@common/services';
+import { AuthorizationService, CurrentUserService, NavigationService } from '@common/services';
+import { currentUserStore } from '@common/stores';
 
 @Component({
   selector: 'ww-logout',
@@ -20,6 +21,7 @@ import { AuthorizationService, NavigationService } from '@common/services';
 export class LogoutComponent implements OnInit {
   public constructor(
     private readonly authService: AuthorizationService,
+    private readonly currentUserService: CurrentUserService,
     private readonly navigationService: NavigationService,
     private readonly router: Router,
   ) {
@@ -32,6 +34,7 @@ export class LogoutComponent implements OnInit {
         catchError(() => of(null)),
       )
       .subscribe(() => {
+        this.currentUserService.setUserDetails(null);
         this.router.navigate(['/login']);
       });
   }
