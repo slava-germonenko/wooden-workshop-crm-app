@@ -7,6 +7,7 @@ import {
   NbContextMenuModule,
   NbGlobalPhysicalPosition,
   NbLayoutModule,
+  NbMenuModule,
   NbSidebarModule,
   NbThemeModule,
   NbToastrModule,
@@ -40,6 +41,7 @@ import { AppComponent } from './app.component';
     NbContextMenuModule,
     NbEvaIconsModule,
     NbLayoutModule,
+    NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbToastrModule.forRoot({

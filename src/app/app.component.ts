@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { distinctUntilChanged, map } from 'rxjs';
 
 import { CurrentUserService, NavigationService } from '@common/services';
 
@@ -18,15 +16,8 @@ export class AppComponent {
 
   public readonly showToolbar$ = this.navigationService.showToolbar$;
 
-  public readonly darkThemeEnabled$ = this.themeService.onThemeChange()
-    .pipe(
-      map(() => this.themeService.currentTheme === 'dark'),
-      distinctUntilChanged(),
-    );
-
   public constructor(
     private readonly currentUserService: CurrentUserService,
     private readonly navigationService: NavigationService,
-    private readonly themeService: NbThemeService,
   ) { }
 }

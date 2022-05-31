@@ -12,7 +12,18 @@ export const DEFAULT_NAVIGATION_STATE: NavigationState = {
   showSidebar: false,
   showToolbar: false,
   sidebarItems: [],
-  profileMenuItems: [],
+  profileMenuItems: [
+    {
+      icon: 'person-outline',
+      title: 'Профиль',
+      link: '/profile',
+    },
+    {
+      icon: 'log-out-outline',
+      title: 'Выход',
+      link: '/logout',
+    },
+  ],
 };
 
 export const navigationStore = createStore(

@@ -1,8 +1,6 @@
-<nb-layout
-  [ngClass]="(darkThemeEnabled$ | async) ? 'dark-theme-background' : 'light-theme-background'"
->
+<nb-layout>
   <nb-layout-header *ngIf="showToolbar$ | async" fixed>
-    <span></span>
+    <span class="flex-spacer"></span>
     <nb-user
       *ngIf="currentUser$ | async as user"
       [name]="user | fullName"
