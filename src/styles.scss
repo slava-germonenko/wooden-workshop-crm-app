@@ -4,3 +4,25 @@
 @include theme.nb-install() {
   @include nb.nb-theme-global();
 };
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-size {
+  @extend .full-width;
+  @extend .full-height;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}

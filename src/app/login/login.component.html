@@ -1,0 +1,13 @@
+<nb-card>
+  <h2>Вход в CRM</h2>
+
+  <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
+    <label for="emailAddress" type="email" class="label">Почта</label>
+    <input id="emailAddress" formControlName="emailAddress" nbInput fullWidth fieldSize="giant">
+
+    <label for="password" class="label">Пароль</label>
+    <input formControlName="password" id="password" type="password" fieldSize="giant" fullWidth nbInput>
+
+    <button status="primary" [disabled]="loginFormGroup.invalid" size="giant" fullWidth nbButton>Войти</button>
+  </form>
+</nb-card>

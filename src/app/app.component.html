@@ -1,10 +1,19 @@
-<nb-layout>
-  <nb-layout-header fixed>
+<nb-layout
+  [ngClass]="(darkThemeEnabled$ | async) ? 'dark-theme-background' : 'light-theme-background'"
+>
+  <nb-layout-header *ngIf="showToolbar$ | async" fixed>
+    <span></span>
+    <nb-user
+      *ngIf="currentUser$ | async as user"
+      [name]="user | fullName"
+      [nbContextMenu]="(profileMenuItems$ | async) || []"
+    >
+    </nb-user>
   </nb-layout-header>
 
-  <nb-sidebar></nb-sidebar>
+  <nb-sidebar *ngIf="showSidebar$ | async"></nb-sidebar>
 
   <nb-layout-column>
-
+    <router-outlet></router-outlet>
   </nb-layout-column>
 </nb-layout>

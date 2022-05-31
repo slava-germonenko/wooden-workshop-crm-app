@@ -14,3 +14,12 @@ $nb-themes: nb.nb-register-theme((
   // color-primary-800: #102694,
   // color-primary-900: #091c7a,
 ), default, default);
+
+.light-theme-background {
+  background-color: white;
+}
+
+.dark-theme-background {
+  background-color: rgb(34, 43, 69);
+}
+
