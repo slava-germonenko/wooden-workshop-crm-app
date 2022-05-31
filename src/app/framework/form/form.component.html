@@ -1,0 +1,38 @@
+<form
+  *ngIf="formGroup"
+  [formGroup]="formGroup"
+  (ngSubmit)="wwSubmit.emit(formGroup.value)"
+  class="grid-layout"
+>
+  <ng-container *ngFor="let field of fieldsInner">
+    <ng-container [ngSwitch]="field.type">
+      <ng-template ngSwitchDefault></ng-template>
+      <span>
+        <label class="label">{{ field.label }}</label>
+      </span>
+      <div>
+        <input
+          [id]="field.id"
+          [formControlName]="field.id"
+          [placeholder]="field.placeholder || ''"
+          [type]="field.type"
+          nbInput
+          class="base-input"
+        >
+        <p *ngIf="getErrorMessage(field.id) as errorMessage" class="caption status-danger">
+          {{ errorMessage }}
+        </p>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <div>
+    <button *ngIf="showCancel" (click)="wwCancel.emit()" type="button" nbButton>
+      {{ cancelText }}
+    </button>
+  </div>
+
+  <button [disabled]="formGroup.invalid" nbButton status="primary">
+    {{ submitText }}
+  </button>
+</form>
