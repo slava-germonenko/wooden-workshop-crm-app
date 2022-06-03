@@ -4,14 +4,21 @@ import { NbMenuItem } from '@nebular/theme';
 export interface NavigationState {
   showSidebar: boolean;
   showToolbar: boolean;
-  sidebarItems: NbMenuItem[],
   profileMenuItems: NbMenuItem[],
+  sidebarItems: NbMenuItem[],
+  toolbarItems: NbMenuItem[],
 }
 
 export const DEFAULT_NAVIGATION_STATE: NavigationState = {
   showSidebar: false,
   showToolbar: false,
   sidebarItems: [],
+  toolbarItems: [
+    {
+      title: 'Команда',
+      link: '/team',
+    },
+  ],
   profileMenuItems: [
     {
       icon: 'person-outline',

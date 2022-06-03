@@ -25,6 +25,10 @@ export class NavigationService {
     pluck('sidebarItems'),
   );
 
+  public readonly toolbarItems$ = this.store.pipe(
+    pluck('toolbarItems'),
+  );
+
   public setShowNavigation(visible: boolean): void {
     this.store.update((state) => ({ ...state, showSidebar: visible, showToolbar: visible }));
   }

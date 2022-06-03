@@ -21,6 +21,8 @@ export class AppComponent implements AfterViewInit {
 
   public readonly showToolbar$ = this.navigationService.showToolbar$;
 
+  public readonly toolbarItem$ = this.navigationService.toolbarItems$;
+
   public sidebarItems: NbMenuItem[] = EMPTY_ARRAY;
 
   public constructor(

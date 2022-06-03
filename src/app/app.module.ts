@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
+  NbButtonModule,
   NbContextMenuModule,
   NbGlobalPhysicalPosition,
   NbLayoutModule,
@@ -43,13 +44,14 @@ import { AppComponent } from './app.component';
     NbLayoutModule,
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({name: 'default'}),
     NbToastrModule.forRoot({
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       duration: 5000,
       limit: 5,
     }),
     NbUserModule,
+    NbButtonModule,
   ],
   providers: [
     InterceptorsProvider.provide(WithAccessTokenInterceptor),

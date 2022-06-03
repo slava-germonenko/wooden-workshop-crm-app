@@ -1,0 +1,51 @@
+<nb-card class="full-size">
+  <nb-card-header>
+    <div class="flex-row">
+      <div *ngIf="selectEnabled" class="checkbox-cell">
+        <nb-checkbox
+          status="primary"
+        ></nb-checkbox>
+      </div>
+      <div *ngFor="let column of columns" class="base-cell">
+        {{column.label}}
+      </div>
+      <div *ngIf="getEntryActions">
+        Действия
+      </div>
+    </div>
+  </nb-card-header>
+
+  <nb-list nbInfiniteList>
+    <nb-list-item *ngFor="let row of dataSourceInner | async">
+      <div *ngIf="selectEnabled" class="checkbox-cell">
+        <nb-checkbox
+          status="primary"
+          [checked]="selectionModel.isSelected(row)"
+          (checkedChange)="selectionModel.toggle(row)"
+        ></nb-checkbox>
+      </div>
+
+      <div *ngFor="let column of columns" class="base-cell">
+        <ng-container [ngSwitch]="column.cellType">
+          <ng-template ngSwitchCase="tag">
+            <nb-tag
+              [status]="column.getStatus ? column.getStatus(row) : 'basic'"
+              [text]="column.getValue(row)?.toString() ?? ''"
+            >
+            </nb-tag>
+          </ng-template>
+
+          <ng-container *ngSwitchDefault>
+            {{column.getValue(row)}}
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div *ngIf="getEntryActions">
+        <button nbButton [nbContextMenu]="getEntryActions(row)">
+          <nb-icon icon="more-vertical-outline"></nb-icon>
+        </button>
+      </div>
+    </nb-list-item>
+  </nb-list>
+</nb-card>
