@@ -1,8 +1,10 @@
-<nb-card class="full-size">
+<nb-card class="full-size" [nbSpinner]="loading" nbSpinnerSize="large" nbSpinnerStatus="primary">
   <nb-card-header>
     <div class="flex-row">
       <div *ngIf="selectEnabled" class="checkbox-cell">
         <nb-checkbox
+          [checked]="allSelected"
+          (checkedChange)="toggleAll()"
           status="primary"
         ></nb-checkbox>
       </div>
@@ -16,12 +18,12 @@
   </nb-card-header>
 
   <nb-list nbInfiniteList>
-    <nb-list-item *ngFor="let row of dataSourceInner | async">
+    <nb-list-item *ngFor="let row of dataSource">
       <div *ngIf="selectEnabled" class="checkbox-cell">
         <nb-checkbox
           status="primary"
           [checked]="selectionModel.isSelected(row)"
-          (checkedChange)="selectionModel.toggle(row)"
+          (checkedChange)="toggleItem(row)"
         ></nb-checkbox>
       </div>
 
@@ -47,5 +49,25 @@
         </button>
       </div>
     </nb-list-item>
+
+    <nb-list-item *ngIf="!dataSource.length else loadMore" class="place-center-flex">
+      Ничего не найдено
+    </nb-list-item>
+
+    <ng-template #loadMore>
+      <nb-list-item class="load-more place-center-flex">
+        <span>Показано {{dataSource.length}} записей из {{length}}</span>
+        <button
+          appearance="ghost"
+          size="tiny"
+          status="primary"
+          nbButton
+          [disabled]="dataSource.length >= length"
+          (click)="loadMoreClick.emit()"
+        >
+          Загрузить ещё
+        </button>
+      </nb-list-item>
+    </ng-template>
   </nb-list>
 </nb-card>

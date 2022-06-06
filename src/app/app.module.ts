@@ -6,6 +6,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbButtonModule,
   NbContextMenuModule,
+  NbDialogModule,
   NbGlobalPhysicalPosition,
   NbLayoutModule,
   NbMenuModule,
@@ -40,11 +41,12 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     FullNameModule,
     NbContextMenuModule,
+    NbDialogModule.forRoot(),
     NbEvaIconsModule,
     NbLayoutModule,
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NbThemeModule.forRoot({name: 'default'}),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbToastrModule.forRoot({
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       duration: 5000,

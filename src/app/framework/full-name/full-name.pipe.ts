@@ -5,6 +5,7 @@ import { Person } from '@framework/full-name/person';
   name: 'fullName',
 })
 export class FullNamePipe implements PipeTransform {
+  // eslint-disable-next-line class-methods-use-this
   public transform({ firstName, lastName }: Person): string {
     return `${firstName} ${lastName}`;
   }

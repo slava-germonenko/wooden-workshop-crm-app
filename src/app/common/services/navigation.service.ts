@@ -34,6 +34,6 @@ export class NavigationService {
   }
 
   public setSidebarItems(sidebarItems: NbMenuItem[]): void {
-    this.store.update((state) => ({ ...state, sidebarItems}));
+    this.store.update((state) => ({ ...state, sidebarItems }));
   }
 }

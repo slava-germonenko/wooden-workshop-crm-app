@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import {
   NbButtonModule,
@@ -11,7 +12,7 @@ import {
 import { FullNameModule } from '@framework/full-name';
 import { TableListModule } from '@framework/table-list';
 
-import { UsersComponent } from './users';
+import { UsersComponent, UsersStateService } from './users';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'users' },
@@ -29,6 +30,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TableListModule,
     NbToggleModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    UsersStateService,
   ],
   declarations: [
     UsersComponent,

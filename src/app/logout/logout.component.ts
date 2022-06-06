@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 
 import { AuthorizationService, CurrentUserService, NavigationService } from '@common/services';
-import { currentUserStore } from '@common/stores';
 
 @Component({
   selector: 'ww-logout',

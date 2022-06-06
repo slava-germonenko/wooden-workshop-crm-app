@@ -29,4 +29,8 @@ export class ApiUrlsService {
   public getUserDetailsEndpointUrl(userId: number): string {
     return `${this.apiUrl}/api/users/${userId}`;
   }
+
+  public getUserInvitationsBaseEndpointUrl(): string {
+    return `${this.apiUrl}/api/user-invitations`;
+  }
 }
