@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+
 import { SelectionModel } from '@angular/cdk/collections';
-import { BehaviorSubject, Observable, isObservable } from 'rxjs';
 
 import { ColumnDescriptor } from './column-descriptor';
 import { ActionsProvider } from './types';
@@ -12,16 +18,15 @@ import { ActionsProvider } from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableListComponent {
-  private dataSourceStream = new BehaviorSubject<unknown[]>([]);
-
-  public dataSourceInner: Observable<unknown[]> = this.dataSourceStream;
-
   public selectionModel = new SelectionModel<unknown>(true);
 
-  public allChecked = false;
+  public allSelected = false;
 
   @Input()
   public columns: ColumnDescriptor<unknown>[] = [];
+
+  @Input()
+  public dataSource: unknown[] = [];
 
   @Input()
   public getEntryActions: ActionsProvider | null = null;
@@ -30,12 +35,28 @@ export class TableListComponent {
   public selectEnabled = false;
 
   @Input()
-  public set dataSource(data: Observable<unknown[]> | unknown[]) {
-    if (isObservable(data)) {
-      this.dataSourceInner = data;
-    } else {
-      this.dataSourceInner = this.dataSourceStream;
-      this.dataSourceStream.next(data);
+  public length = 0;
+
+  @Input()
+  public loading = false;
+
+  @Output()
+  public selectionChange = new EventEmitter<unknown[]>();
+
+  @Output()
+  public loadMoreClick = new EventEmitter<void>();
+
+  public toggleAll(): void {
+    this.selectionModel.clear();
+    if (!this.allSelected) {
+      this.dataSource.forEach((item) => this.selectionModel.select(item));
+      this.allSelected = true;
     }
+  }
+
+  public toggleItem(item: unknown): void {
+    this.selectionModel.toggle(item);
+    this.allSelected = this.selectionModel.selected.length === this.dataSource.length;
+    this.selectionChange.emit(this.selectionModel.selected);
   }
 }

@@ -6,7 +6,7 @@ import {
   NbCheckboxModule,
   NbContextMenuModule,
   NbIconModule,
-  NbListModule,
+  NbListModule, NbSpinnerModule,
   NbTagModule,
 } from '@nebular/theme';
 
@@ -25,6 +25,7 @@ import { TableListComponent } from './table-list.component';
     NbIconModule,
     NbListModule,
     NbTagModule,
+    NbSpinnerModule,
   ],
   exports: [
     TableListComponent,

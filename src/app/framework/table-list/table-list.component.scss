@@ -21,3 +21,10 @@ nb-list {
 .base-cell {
   flex: 1 1;
 }
+
+.load-more {
+  span {
+    opacity: 60%;
+  }
+  gap: 10px;
+}

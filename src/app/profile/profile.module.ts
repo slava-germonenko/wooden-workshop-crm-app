@@ -4,8 +4,7 @@ import { NbCardModule, NbSpinnerModule } from '@nebular/theme';
 
 import { FormModule } from '@framework/form';
 
-import { PersonalDataComponent } from './personal-data';
-import { PersonalDataService } from '@app/profile/personal-data/personal-data.service';
+import { PersonalDataComponent, PersonalDataService } from './personal-data';
 
 const routes: Routes = [
   {

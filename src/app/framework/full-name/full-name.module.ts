@@ -7,7 +7,7 @@ import { FullNamePipe } from './full-name.pipe';
     FullNamePipe,
   ],
   exports: [
-    FullNamePipe
-  ]
+    FullNamePipe,
+  ],
 })
 export class FullNameModule { }

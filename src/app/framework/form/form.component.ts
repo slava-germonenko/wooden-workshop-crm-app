@@ -43,7 +43,7 @@ export class FormComponent {
   public cancelText = 'Отменить';
 
   @Input()
-  public submitText = 'Подтвердить'
+  public submitText = 'Подтвердить';
 
   @Input()
   public showCancel = false;
@@ -86,7 +86,7 @@ export class FormComponent {
     fields.forEach((field) => {
       const validators = field.validators?.map((v) => v.func);
       formGroupObject[field.id] = ['', validators];
-    })
+    });
 
     return this.formBuilder.group(formGroupObject);
   }
