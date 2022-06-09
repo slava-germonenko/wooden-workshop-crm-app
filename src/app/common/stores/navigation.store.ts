@@ -15,6 +15,7 @@ export const DEFAULT_NAVIGATION_STATE: NavigationState = {
   sidebarItems: [],
   toolbarItems: [
     {
+      icon: 'people-outline',
       title: 'Команда',
       link: '/team',
     },
