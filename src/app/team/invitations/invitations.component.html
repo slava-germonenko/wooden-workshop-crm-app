@@ -1,0 +1,35 @@
+<section class="flex-row actions-section">
+  <input [formControl]="searchControl" nbInput placeholder="Поиск...">
+  <div style="position: relative">
+    <button
+      class="filter-button"
+      nbButton
+      [nbPopover]="invitationFilters"
+      nbPopoverPlacement="bottom"
+    >
+      <nb-icon icon="funnel-outline"></nb-icon>
+    </button>
+    <nb-badge *ngIf="filtersApplied" [text]="filtersApplied.toString()" status="danger"></nb-badge>
+  </div>
+  <span class="flex-spacer"></span>
+  <button nbButton status="primary" (click)="openUserInvitationDialog()">
+    Пригласить
+  </button>
+</section>
+<ww-table-list
+  [getEntryActions]="getInvitationsActions"
+  [columns]="tableColumns"
+  [dataSource]="(invitations$ | async) || []"
+  [length]="(total$ | async) || 0"
+  [loading]="(loading$ | async) || false"
+  (action)="handleAction($event)"
+  (loadMoreClick)="loadMore()"
+></ww-table-list>
+
+<ng-template #invitationFilters>
+  <form class="filters" [formGroup]="filtersForm">
+    <nb-checkbox formControlName="active" status="primary">Активные</nb-checkbox>
+    <nb-checkbox formControlName="expired" status="primary">Истёкшие</nb-checkbox>
+    <nb-checkbox formControlName="pending" status="primary">Отправленные</nb-checkbox>
+  </form>
+</ng-template>
