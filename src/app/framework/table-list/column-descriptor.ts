@@ -7,5 +7,5 @@ export interface ColumnDescriptor<TData> {
   label: string;
   cellType: CellType;
   getValue (entry: TData): string | number | Date | null;
-  getStatus? (entry: TData): NbComponentStatus;
+  getStatus?(entry: TData): NbComponentStatus;
 }

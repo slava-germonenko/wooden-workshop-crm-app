@@ -11,7 +11,7 @@
       <div *ngFor="let column of columns" class="base-cell">
         {{column.label}}
       </div>
-      <div *ngIf="getEntryActions">
+      <div *ngIf="getEntryActions" class="actions-cell">
         Действия
       </div>
     </div>
@@ -43,8 +43,8 @@
         </ng-container>
       </div>
 
-      <div *ngIf="getEntryActions">
-        <button nbButton [nbContextMenu]="getEntryActions(row)">
+      <div *ngIf="getEntryActions" class="actions-cell">
+        <button nbButton [nbContextMenu]="mapActionItems(getEntryActions(row), row)" nbContextMenuTag="table-list-actions">
           <nb-icon icon="more-vertical-outline"></nb-icon>
         </button>
       </div>

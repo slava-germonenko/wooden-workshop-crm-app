@@ -4,9 +4,9 @@
   height: 100%;
 }
 
-nb-list {
-  padding-left: 10px;
-  padding-right: 10px;
+nb-list-item {
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .header-container {
@@ -19,7 +19,11 @@ nb-list {
 }
 
 .base-cell {
-  flex: 1 1;
+  flex: 2 2;
+}
+
+.actions-cell {
+  flex-basis: 75px;
 }
 
 .load-more {
