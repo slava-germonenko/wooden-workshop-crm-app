@@ -3,4 +3,5 @@ export * from './authorization.service';
 export * from './current-user.service';
 export * from './environment.service';
 export * from './navigation.service';
+export * from './user-invitations.service';
 export * from './users.service';

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { NbToastrService } from '@nebular/theme';
 
 import { DEFAULT_PAGING } from '@common/constants';
 import { mapToHttpParams } from '@common/helper-functions';
@@ -18,6 +19,7 @@ export class UsersService {
   public constructor(
     private readonly apiUrlsService: ApiUrlsService,
     private readonly httpClient: HttpClient,
+    private readonly toastr: NbToastrService,
   ) { }
 
   public getUsers(usersFilter: UsersFilter = DEFAULT_PAGING): Observable<PagedResult<User>> {
@@ -31,6 +33,14 @@ export class UsersService {
   }
 
   public updateUser(user: User): Observable<User> {
-    return this.httpClient.patch<User>(this.baseUsersUrl, user);
+    return this.httpClient.patch<User>(this.baseUsersUrl, user)
+      .pipe(
+        tap({
+          error: (err: HttpErrorResponse) => this.toastr.danger(
+            err.error?.message ?? 'Произошла непредвиденная ошибка при попытке обновить данные пользователя!',
+            'Ошибка обновления пользователя',
+          ),
+        }),
+      );
   }
 }
