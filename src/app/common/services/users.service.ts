@@ -43,4 +43,18 @@ export class UsersService {
         }),
       );
   }
+
+  public setUserPassword(userId: number, password: string): Observable<void> {
+    const url = this.apiUrlsService.getPasswordEndpointUrl(userId);
+    return this.httpClient.patch<void>(url, { password })
+      .pipe(
+        tap({
+          next: () => this.toastr.success('Новый пароль установлен.', 'Профиль обновлён'),
+          error: (err: HttpErrorResponse) => this.toastr.danger(
+            err.error?.message ?? 'Произошла непредвиденная ошибка при попытке обновить пароль!',
+            'Ошибка обновления пароля',
+          ),
+        }),
+      );
+  }
 }

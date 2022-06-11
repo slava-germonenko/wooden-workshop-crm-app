@@ -29,8 +29,8 @@ export const INVITATIONS_TABLE_COLUMNS: ColumnDescriptor<Invitation>[] = [
       if (!invitation.active) {
         return 'Неактивно';
       }
-      const invitationDate = toLocalDateTime(invitation.expireDate);
-      if (invitationDate < new Date()) {
+      const expireDate = toLocalDateTime(invitation.expireDate);
+      if (expireDate < new Date()) {
         return 'Истекло';
       }
       return 'Отправлено';
@@ -45,8 +45,8 @@ export const INVITATIONS_TABLE_COLUMNS: ColumnDescriptor<Invitation>[] = [
       if (!invitation.active) {
         return 'warning';
       }
-      const invitationDate = toLocalDateTime(invitation.expireDate);
-      if (invitationDate < new Date()) {
+      const expireDate = toLocalDateTime(invitation.expireDate);
+      if (expireDate < new Date()) {
         return 'warning';
       }
       return 'basic';
@@ -64,7 +64,8 @@ export const INVITATION_ACTIONS_PROVIDER: ActionsProvider<Invitation> = (invitat
     });
   }
 
-  if (invitation.active && invitation.accepted === null) {
+  const expireDate = toLocalDateTime(invitation.expireDate);
+  if (invitation.active && invitation.accepted === null && expireDate > new Date()) {
     actions.push({
       id: 'deactivate',
       icon: 'undo-outline',

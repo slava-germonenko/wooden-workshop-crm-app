@@ -22,6 +22,10 @@ export class ApiUrlsService {
     return `${this.apiUrl}/api/auth/sign-out`;
   }
 
+  public getPasswordEndpointUrl(userId: number): string {
+    return `${this.apiUrl}/api/users/${userId}/password`;
+  }
+
   public getRefreshSessionEndpointUrl(): string {
     return `${this.apiUrl}/api/auth/refresh`;
   }

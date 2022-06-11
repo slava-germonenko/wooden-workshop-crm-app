@@ -5,6 +5,7 @@ import { NbCardModule, NbSpinnerModule } from '@nebular/theme';
 import { FormModule } from '@framework/form';
 
 import { PersonalDataComponent, PersonalDataService } from './personal-data';
+import { SecurityComponent } from './security';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'personal-data',
     component: PersonalDataComponent,
+  },
+  {
+    path: 'security',
+    component: SecurityComponent,
   },
 ];
 
@@ -30,6 +35,7 @@ const routes: Routes = [
   ],
   declarations: [
     PersonalDataComponent,
+    SecurityComponent,
   ],
 })
 export class ProfileModule { }
