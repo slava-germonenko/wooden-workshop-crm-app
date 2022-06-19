@@ -1,7 +1,7 @@
 import { PagedResult } from '@common/models/page';
 import { User, UsersFilter } from '@common/models/users';
 
-import { TeamUsersState } from './state';
+import { TeamUsersState } from './store';
 
 export function setNewUsers(state: TeamUsersState, usersPage: PagedResult<User>): TeamUsersState {
   return {
@@ -37,4 +37,14 @@ export function setNextPagePending(state: TeamUsersState): TeamUsersState {
     ...state,
     nextPagePending: true,
   };
+}
+
+export function updateUserLocally(state: TeamUsersState, user: User): TeamUsersState {
+  const userToUpdateIndex = state.users.findIndex((u) => u.id === user.id);
+  if (userToUpdateIndex < 0) {
+    return state;
+  }
+
+  state.users.splice(userToUpdateIndex, 1, user);
+  return { ...state, users: [...state.users] };
 }

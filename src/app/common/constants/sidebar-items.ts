@@ -6,6 +6,11 @@ export const PROFILE_SIDEBAR_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     link: '/profile/personal-data',
   },
+  {
+    title: 'Безопасность',
+    icon: 'shield-outline',
+    link: '/profile/security',
+  },
 ];
 
 export const TEAM_SIDEBAR_ITEMS: NbMenuItem[] = [

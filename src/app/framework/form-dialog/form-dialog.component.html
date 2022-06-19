@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header>{{config.title}}</nb-card-header>
+
+  <ww-form
+    [cancelText]="config.cancelText || 'Отменить'"
+    [fields]="config.formFields"
+    [showCancel]="config.showCancel || false"
+    [showSubmit]="config.showSubmit || true"
+    [submitText]="config.submitText || 'Подтвердить'"
+    (wwSubmit)="close($event)"
+    (wwCancel)="close(undefined)"
+  ></ww-form>
+</nb-card>

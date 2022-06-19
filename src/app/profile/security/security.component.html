@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>Пароль</nb-card-header>
+  <nb-card-body>
+    <ww-form
+      [fields]="passwordFormFields"
+      submitText="Сохранить"
+      (wwSubmit)="changePassword($event)"
+    ></ww-form>
+  </nb-card-body>
+</nb-card>

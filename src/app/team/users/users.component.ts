@@ -16,7 +16,9 @@ import {
   tap,
 } from 'rxjs';
 
-import { USERS_TABLE_COLUMNS } from './constants';
+import { User } from '@common/models/users';
+
+import { USER_ACTIONS_PROVIDER, USERS_TABLE_COLUMNS } from './constants';
 import { UsersStateService } from './users-state.service';
 
 @Component({
@@ -30,25 +32,23 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public activeUsersToggleControl = new FormControl(false);
 
-  public searchControl = new FormControl('');
+  public loading$ = this.usersStateService.loading$;
 
-  public loading = true;
+  public readonly searchControl = new FormControl('');
 
   public readonly tableColumns = [...USERS_TABLE_COLUMNS];
 
-  public readonly users$ = this.usersStateService.users$
-    .pipe(
-      tap(() => {
-        this.loading = false;
-      }),
-    );
+  public readonly getUserActions = USER_ACTIONS_PROVIDER;
+
+  public readonly users$ = this.usersStateService.users$;
 
   public readonly total$ = this.usersStateService.totalUsersCount$;
 
-  public constructor(private readonly usersStateService: UsersStateService) { }
+  public constructor(
+    private readonly usersStateService: UsersStateService,
+  ) { }
 
   public loadMoreClick(): void {
-    this.loading = true;
     this.usersStateService.markAsPendingNextPage();
   }
 
@@ -69,13 +69,28 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.filterChangesSub = combineLatest([searchStream, activeOnlyStream])
       .pipe(
         skip(1),
-        tap(() => {
-          this.loading = true;
-        }),
       )
       .subscribe(([search, active]) => {
         this.usersStateService.setFilters({ search, active });
       });
+  }
+
+  public handleUserAction({ id, data }: { id: string, data: unknown }): void {
+    switch (id) {
+      case 'activate': {
+        this.usersStateService.updateUserStatus(data as User, true);
+        break;
+      }
+      case 'deactivate': {
+        this.usersStateService.updateUserStatus(data as User, false);
+        break;
+      }
+      default: { break; }
+    }
+  }
+
+  public openUserInvitationDialog(): void {
+    this.usersStateService.openUserInvitationDialog();
   }
 
   public ngOnDestroy(): void {

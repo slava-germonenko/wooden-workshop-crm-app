@@ -1,13 +1,8 @@
 <nb-layout>
   <nb-layout-header *ngIf="showToolbar$ | async" fixed>
-    <button
-      *ngFor="let button of toolbarItem$ | async"
-      nbButton
-      appearance="ghost"
-      [routerLink]="button.link"
-    >
-      {{button.title}}
-    </button>
+    <nb-actions *ngFor="let button of toolbarItem$ | async">
+      <nb-action [icon]="button.icon || ''" [routerLink]="button.link"></nb-action>
+    </nb-actions>
     <span class="flex-spacer"></span>
     <nb-user
       *ngIf="currentUser$ | async as user"

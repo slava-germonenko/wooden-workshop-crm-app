@@ -2,12 +2,16 @@
   <input [formControl]="searchControl" nbInput placeholder="Поиск...">
   <nb-toggle [formControl]="activeUsersToggleControl">Только активные</nb-toggle>
   <span class="flex-spacer"></span>
-  <button nbButton status="primary">Пригласить</button>
+  <button nbButton status="primary" (click)="openUserInvitationDialog()">
+    Пригласить
+  </button>
 </section>
 <ww-table-list
+  [getEntryActions]="getUserActions"
   [columns]="tableColumns"
   [dataSource]="(users$ | async) || []"
   [length]="(total$ | async) || 0"
-  [loading]="loading"
+  [loading]="(loading$ | async) || false"
+  (action)="handleUserAction($event)"
   (loadMoreClick)="loadMoreClick()"
 ></ww-table-list>

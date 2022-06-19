@@ -3,21 +3,31 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { NbToastrService } from '@nebular/theme';
 
-import { Invitation } from '@common/models/invitations';
+import { mapToHttpParams } from '@common/helper-functions';
+import { Invitation, InvitationsFilter } from '@common/models/invitations';
+import { PagedResult } from '@common/models/page';
 
 import { ApiUrlsService } from './api-urls.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserInvitationsService {
+  private get userInvitationsUrl(): string {
+    return this.apiUrlsService.getUserInvitationsBaseEndpointUrl();
+  }
+
   public constructor(
     private readonly apiUrlsService: ApiUrlsService,
     private readonly httpClient: HttpClient,
     private readonly toastr: NbToastrService,
   ) { }
 
-  public sendNewUserInvitation(invitation: Pick<Invitation, 'emailAddress' | 'expireDate'>): Observable<Invitation> {
-    const url = this.apiUrlsService.getUserInvitationsBaseEndpointUrl();
-    return this.httpClient.post<Invitation>(url, invitation)
+  public getUserInvitations(filter: InvitationsFilter): Observable<PagedResult<Invitation>> {
+    const params = mapToHttpParams(filter);
+    return this.httpClient.get<PagedResult<Invitation>>(this.userInvitationsUrl, { params });
+  }
+
+  public sendUserInvitation(invitation: Pick<Invitation, 'emailAddress'>): Observable<Invitation> {
+    return this.httpClient.post<Invitation>(this.userInvitationsUrl, invitation)
       .pipe(
         tap({
           next: () => this.toastr.success(
@@ -30,5 +40,9 @@ export class UserInvitationsService {
           ),
         }),
       );
+  }
+
+  public updateUserInvitation(invitation: Invitation): Observable<Invitation> {
+    return this.httpClient.patch<Invitation>(this.userInvitationsUrl, invitation);
   }
 }

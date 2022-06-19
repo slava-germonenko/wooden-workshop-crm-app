@@ -1,9 +1,12 @@
+import { registerLocaleData } from '@angular/common';
+import ru from '@angular/common/locales/ru';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
+  NbActionsModule,
   NbButtonModule,
   NbContextMenuModule,
   NbDialogModule,
@@ -30,6 +33,8 @@ import { appInitializerFactory } from './app-initializer';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+registerLocaleData(ru);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +51,7 @@ import { AppComponent } from './app.component';
     NbLayoutModule,
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({name: 'default'}),
     NbToastrModule.forRoot({
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       duration: 5000,
@@ -54,6 +59,7 @@ import { AppComponent } from './app.component';
     }),
     NbUserModule,
     NbButtonModule,
+    NbActionsModule,
   ],
   providers: [
     InterceptorsProvider.provide(WithAccessTokenInterceptor),
