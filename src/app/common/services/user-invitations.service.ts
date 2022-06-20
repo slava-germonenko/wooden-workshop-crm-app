@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { NbToastrService } from '@nebular/theme';
 
 import { mapToHttpParams } from '@common/helper-functions';
-import { Invitation, InvitationsFilter } from '@common/models/invitations';
+import { AcceptUserInvitationDto, Invitation, InvitationsFilter } from '@common/models/invitations';
 import { PagedResult } from '@common/models/page';
 
 import { ApiUrlsService } from './api-urls.service';
@@ -20,6 +20,11 @@ export class UserInvitationsService {
     private readonly httpClient: HttpClient,
     private readonly toastr: NbToastrService,
   ) { }
+
+  public getUserInvitation(uniqueToken: string): Observable<Invitation> {
+    const url = this.apiUrlsService.getUserInvitationDetailsEndpointUrl(uniqueToken);
+    return this.httpClient.get<Invitation>(url);
+  }
 
   public getUserInvitations(filter: InvitationsFilter): Observable<PagedResult<Invitation>> {
     const params = mapToHttpParams(filter);
@@ -44,5 +49,38 @@ export class UserInvitationsService {
 
   public updateUserInvitation(invitation: Invitation): Observable<Invitation> {
     return this.httpClient.patch<Invitation>(this.userInvitationsUrl, invitation);
+  }
+
+  public acceptUserInvitation(uniqueToken: string, userData: AcceptUserInvitationDto): Observable<void> {
+    const url = this.apiUrlsService.getAcceptUserInvitationEndpointUrl(uniqueToken);
+    return this.httpClient.post<void>(url, userData)
+      .pipe(
+        tap({
+          next: () => {
+            this.toastr.success('Пришлашение принято. Спасибо, что вы с нами! :)', 'Приглашение принято');
+          },
+          error: (err: HttpErrorResponse) => {
+            this.toastr.danger(
+              err.error?.message ?? 'Произошла непредвиденная ошибка при попытке принять приглашение!',
+              'Непредвиденная ошибка',
+            );
+          },
+        }),
+      );
+  }
+
+  public declineUserInvitation(token: string): Observable<void> {
+    const url = this.apiUrlsService.getDeclineUserInvitationEndpointUrl(token);
+    return this.httpClient.post<void>(url, null)
+      .pipe(
+        tap({
+          error: (err: HttpErrorResponse) => {
+            this.toastr.danger(
+              err.error?.message ?? 'Произошла непредвиденная ошибка при попытке отклонить приглашение!',
+              'Непредвиденная ошибка',
+            );
+          },
+        }),
+      );
   }
 }

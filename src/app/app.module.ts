@@ -51,7 +51,7 @@ registerLocaleData(ru);
     NbLayoutModule,
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NbThemeModule.forRoot({name: 'default'}),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbToastrModule.forRoot({
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       duration: 5000,

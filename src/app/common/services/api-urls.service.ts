@@ -10,8 +10,16 @@ export class ApiUrlsService {
 
   public constructor(private readonly environmentService: EnvironmentService) { }
 
+  public getAcceptUserInvitationEndpointUrl(token: string): string {
+    return `${this.apiUrl}/api/user-invitations/${token}/accept`;
+  }
+
   public getBaseUsersEndpointUrl(): string {
     return `${this.apiUrl}/api/users`;
+  }
+
+  public getDeclineUserInvitationEndpointUrl(token: string): string {
+    return `${this.apiUrl}/api/user-invitations/${token}/decline`;
   }
 
   public getLoginEndpointUrl(): string {
@@ -32,6 +40,10 @@ export class ApiUrlsService {
 
   public getUserDetailsEndpointUrl(userId: number): string {
     return `${this.apiUrl}/api/users/${userId}`;
+  }
+
+  public getUserInvitationDetailsEndpointUrl(token: string): string {
+    return `${this.apiUrl}/api/user-invitations/${token}`;
   }
 
   public getUserInvitationsBaseEndpointUrl(): string {

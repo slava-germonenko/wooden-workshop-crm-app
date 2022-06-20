@@ -1,0 +1,34 @@
+<ng-template [ngIf]="showCurrentUserAlert">
+  <nb-alert *ngIf="currentUser$ | async as currentUser" closable (close)="showCurrentUserAlert = false" status="info" >
+    <div>
+      Вы уже авторизированы как {{ currentUser | fullName }}.
+      Нажмите <a routerLink="/profile">здесь</a>, чтобы продолжить работу как {{ currentUser | fullName }}.
+    </div>
+  </nb-alert>
+</ng-template>
+
+<ng-container *ngIf="invitation$ | async as invitation else noInvitation">
+  <div *ngIf="invitationCanBeAccepted else invitationUnacceptable" class="place-center flex-spacer">
+    <nb-card>
+      <nb-card-header>Приглашение в команду Germonenko.by</nb-card-header>
+      <nb-card-body>
+        <ww-form
+          cancelText="Отклонить"
+          [fields]="acceptInvitationFormField"
+          [showCancel]="true"
+          submitText="Принять и зарегистрироваться"
+          (wwCancel)="declineInvitation()"
+          (wwSubmit)="acceptInvitation($event)"
+        ></ww-form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</ng-container>
+
+<ng-template #invitationUnacceptable>
+  <nb-card>Приглашение больше не действительно.</nb-card>
+</ng-template>
+
+<ng-template #noInvitation>
+  <nb-card>Приглашение на найдено.</nb-card>
+</ng-template>

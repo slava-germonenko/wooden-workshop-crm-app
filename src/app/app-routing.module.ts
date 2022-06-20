@@ -38,6 +38,10 @@ const routes: Routes = [
       sidebar: TEAM_SIDEBAR_ITEMS,
     },
   },
+  {
+    path: 'user-invitations',
+    loadChildren: () => import('@app/user-invitations/user-invitations.module').then((m) => m.UserInvitationsModule),
+  },
 ];
 
 @NgModule({
