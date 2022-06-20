@@ -1,0 +1,15 @@
+<nb-card>
+  <nb-card-header *ngIf="config?.title">
+    {{config?.title}}
+  </nb-card-header>
+  <nb-card-body [innerHtml]="config?.questionHtml"></nb-card-body>
+  <nb-card-footer class="flex-row">
+    <button nbButton (click)="decline()">
+      {{config?.declineText || 'Отклонить'}}
+    </button>
+    <span class="flex-spacer"></span>
+    <button nbButton status="primary" (click)="confirm()">
+      {{config?.confirmText || 'Принять'}}
+    </button>
+  </nb-card-footer>
+</nb-card>

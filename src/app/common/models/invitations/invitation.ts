@@ -8,5 +8,6 @@ export interface Invitation {
   emailAddress: string;
   expireDate: Date;
   type: InvitationTypes;
+  uniqueToken: string;
   updatedDate: Date | null;
 }

@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 
 const dateTimePipe = new DatePipe('ru');
 
-export function toLocalDateTime(value: Date): Date {
+export function toLocalDateTime(value: Date | string): Date {
   let stringRepresentation = value.toString();
   if (!stringRepresentation.endsWith('Z')) {
     stringRepresentation = `${stringRepresentation}Z`;

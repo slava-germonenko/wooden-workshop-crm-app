@@ -29,6 +29,11 @@ export class NavigationService {
     pluck('toolbarItems'),
   );
 
+  public get navigationEnabledSnapshot(): boolean {
+    const { showSidebar, showToolbar } = this.store.state;
+    return showSidebar && showToolbar;
+  }
+
   public setShowNavigation(visible: boolean): void {
     this.store.update((state) => ({ ...state, showSidebar: visible, showToolbar: visible }));
   }
